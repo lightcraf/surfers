@@ -32,7 +32,7 @@ class Product extends React.Component {
     }
 
     prevSlide() {
-        var updatedCount = this.state.slideIndex - 1;
+        let updatedCount = this.state.slideIndex - 1;
         if (updatedCount < 0) {
             updatedCount = this.state.data.length - 1;
         }
@@ -43,7 +43,7 @@ class Product extends React.Component {
     }
 
     nextSlide() {
-        var updatedCount = this.state.slideIndex + 1;
+        let updatedCount = this.state.slideIndex + 1;
         if (updatedCount >= this.state.data.length) {
             updatedCount = 0;
         }
@@ -54,22 +54,20 @@ class Product extends React.Component {
     }
 
     selectTab(event) {
-        var tabName;
-        var target = event.target;
+        const target = event.target;
         if (target.className == "tab-links" && target.nodeName === "A") {
-            tabName = event.target.getAttribute("data-tab");
+            const tabName = event.target.getAttribute("data-tab");
             this.resetTab();
             document.getElementById(tabName).style.display = "block";
             target.className += " active-tab";
-        } else {
-            return false;
         }
+        return false;
     }
 
     resetTab(nextProduct) {
-        var tabContent = document.getElementsByClassName("tab-content");
-        var tabLinks = document.getElementsByClassName("tab-links");
-        for (var i = 0; i < tabContent.length; i++) {
+        const tabContent = document.getElementsByClassName("tab-content");
+        const tabLinks = document.getElementsByClassName("tab-links");
+        for (let i = 0; i < tabContent.length; i++) {
             tabContent[i].style.display = "none";
             tabLinks[i].className = tabLinks[i].className.replace(" active-tab", "");
         }
@@ -80,11 +78,11 @@ class Product extends React.Component {
     }
 
     handleThumbsGallery(event) {
-        var target = event.target;
-        var thumbItem = document.getElementsByClassName("thumb__item");
+        const target = event.target;
+        const thumbItem = document.getElementsByClassName("thumb__item");
         if (target.classList.contains("thumb__small-img") && target.nodeName === "IMG") {
             this.setState({ imgSrc: target.src });
-            for (var i = 0; i < thumbItem.length; i++) {
+            for (let i = 0; i < thumbItem.length; i++) {
                 thumbItem[i].classList.remove("thumb-active");
             }
             target.parentNode.classList.add("thumb-active");
@@ -92,8 +90,8 @@ class Product extends React.Component {
     }
 
     resetThumbsGallery() {
-        var thumbItem = document.getElementsByClassName("thumb__item");
-        for (var i = 0; i < thumbItem.length; i++) {
+        const thumbItem = document.getElementsByClassName("thumb__item");
+        for (let i = 0; i < thumbItem.length; i++) {
             thumbItem[i].classList.remove("thumb-active");
         }
         thumbItem[0].classList.add("thumb-active");
@@ -106,10 +104,10 @@ class Product extends React.Component {
         } else if (!isLoaded) {
             return <div className="loader"></div>;
         } else {
-            var n = this.state.slideIndex;
-            var ratingValue = data[n].rating.ratingValue;
-            var itemRating = [];
-            var page = "";
+            let n = this.state.slideIndex;
+            const ratingValue = data[n].rating.ratingValue;
+            const itemRating = [];
+            let page = "";
 
             if (this.state.slideIndex < 9) {
                 page = "0" + (this.state.slideIndex + 1);
@@ -117,7 +115,7 @@ class Product extends React.Component {
                 page = this.state.slideIndex + 1;
             }
 
-            for (var i = 0; i < ratingValue; i++) {
+            for (let i = 0; i < ratingValue; i++) {
                 itemRating.push(<li className="product__rating--rated"></li>);
             }
 
